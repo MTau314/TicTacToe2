@@ -67,9 +67,8 @@ bool Player::checkWinner(playField_t& board)
             board[centre] = board[centre - 4] = board[centre + 4] = Signature::d;
             return (m_win = true);
         }
-
         //3,5,7 diagonal
-        if (board[centre - 2] == m_signature && board[centre + 2] == m_signature)
+        else if (board[centre - 2] == m_signature && board[centre + 2] == m_signature)
         {
             board[centre] = board[centre - 2] = board[centre + 2] = Signature::d;
             return (m_win = true);
