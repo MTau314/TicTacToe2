@@ -23,8 +23,43 @@ bool fullBoard(const playField_t& grid)
     return true; //it is full
 }
 
-template <class T, class S>
-void playTicTacToe(playField_t& board, T& p1, S& p2)
+void playTicTacToe(playField_t& board, AI& p1, Player& p2) //function overload for 1player
+{
+    bool p1turn{ true };
+
+    while (!fullBoard(board))
+    {
+        printArray(board);
+        if (p1turn)
+        {
+            p1.setSignature(board);
+            if (p1.checkWinner(board))
+                break;
+
+            p1turn = false;
+        }
+
+        else
+        {
+            p2.setSignature(board);
+            if (p2.checkWinner(board))
+                break;
+
+            p1turn = true;
+        }
+    }
+    printArray(board);
+
+    if (p1.hasWon())
+        std::cout << "Player 1 has won!\n\a";
+    else if (p2.hasWon())
+        std::cout << "Player 2 has won!\n\a";
+    else if (fullBoard(board) && !p1.hasWon() && !p2.hasWon())
+        std::cout << "Tied game!\n";
+    return;
+}
+
+void playTicTacToe(playField_t& board, Player& p1, Player& p2) //function overload for 2players
 {
     bool p1turn{ true };
 
